@@ -1,0 +1,20 @@
+﻿
+1 - Login & Registration Page >>> Done
+2 - Welcome Screen ( Like Design ) >> Done
+3 - Restaurant Page ( Custom ) >> Done
+4 - About Page
+5 - Simple Cart
+6 - Orders Status Page
+
+
+--- Clases >>> Done
+1 - User (user, password, phone)
+2 - product (id , name , price , description , photo)
+3 - order (id ,  total , datetime , status, prods count)
+4 - order_item (prod_id , order_id , count , price)
+
+--- using
+
+1 - font icons ( material design icon font) >>> Done
+2 - mvvm
+3 - runtime data

@@ -1,0 +1,152 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<controls:AnimationPage
+    x:Class="TaskRestaurant.Views.RestaurantPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:controls="clr-namespace:FormsControls.Base;assembly=FormsControls.Base"
+    xmlns:res="clr-namespace:TaskRestaurant.Common"
+    xmlns:vm="clr-namespace:TaskRestaurant.ViewModels"
+    xmlns:ff="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms">
+    <controls:AnimationPage.PageAnimation>
+        <controls:LandingPageAnimation Subtype="FromRight" Duration="Short" />
+    </controls:AnimationPage.PageAnimation>
+    <controls:AnimationPage.BindingContext>
+        <vm:RestauranViewModel x:Name="mainModel" />
+    </controls:AnimationPage.BindingContext>
+
+    <StackLayout Spacing="0">
+        <StackLayout
+            Padding="10,5"
+            BackgroundColor="{StaticResource HeaderColor}"
+            HeightRequest="60"
+            Orientation="Horizontal">
+            <Label
+                FontAttributes="Bold"
+                FontSize="20"
+                HorizontalOptions="Start"
+                Text="Hotel Name (Restaurant)"
+                TextColor="White"
+                VerticalOptions="CenterAndExpand" />
+            <ImageButton
+                BackgroundColor="{StaticResource HeaderColor}"
+                CornerRadius="7"
+                HorizontalOptions="EndAndExpand"
+                VerticalOptions="CenterAndExpand">
+                <ImageButton.Source>
+                    <FontImageSource
+                        FontFamily="IconFont"
+                        Glyph="{x:Static res:FontIcons.Cart}"
+                        Size="25"
+                        Color="White" />
+                </ImageButton.Source>
+            </ImageButton>
+            <ImageButton
+                Margin="8,0,0,0"
+                BackgroundColor="{StaticResource HeaderColor}"
+                Command="{Binding LogoutCommand}"
+                CornerRadius="7"
+                HorizontalOptions="End"
+                VerticalOptions="CenterAndExpand">
+                <ImageButton.Source>
+                    <FontImageSource
+                        FontFamily="IconFont"
+                        Glyph="{x:Static res:FontIcons.Logout}"
+                        Size="25"
+                        Color="White" />
+                </ImageButton.Source>
+            </ImageButton>
+        </StackLayout>
+        <CollectionView
+            Margin="10,15"
+            HorizontalOptions="FillAndExpand"
+            ItemsSource="{Binding Products}"
+            SelectionMode="None"
+            VerticalOptions="FillAndExpand">
+            <CollectionView.ItemsLayout>
+                <LinearItemsLayout ItemSpacing="10" Orientation="Vertical" />
+            </CollectionView.ItemsLayout>
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Frame
+                        Padding="10"
+                        BorderColor="DimGray"
+                        CornerRadius="5"
+                        HasShadow="True">
+                        <StackLayout>
+                            <Label
+                                FontAttributes="Bold"
+                                FontSize="16"
+                                Text="{Binding Name}"
+                                TextColor="{StaticResource HeaderColor}" />
+                            <ff:CachedImage
+                                Aspect="AspectFit"
+                                HeightRequest="120"
+                                Source="{Binding Photo}"
+                                VerticalOptions="CenterAndExpand" 
+                                DownsampleToViewSize="True"
+                                />
+                            <StackLayout Margin="10,0" Orientation="Horizontal">
+                                <Label
+                                    FontSize="20"
+                                    HorizontalOptions="Start"
+                                    LineBreakMode="WordWrap"
+                                    Text="{Binding Price, StringFormat='{0} LE'}"
+                                    TextColor="{StaticResource NormalColor}" />
+                                <StackLayout
+                                    HorizontalOptions="EndAndExpand"
+                                    Orientation="Horizontal"
+                                    VerticalOptions="CenterAndExpand">
+                                    <ImageButton
+                                        BackgroundColor="Crimson"
+                                        Command="{Binding Source={x:Reference mainModel}, Path=DecreaseCartAmountCommand}"
+                                        CommandParameter="{Binding Source={x:Reference lblCartAmount}, Path=.}"
+                                        CornerRadius="3"
+                                        VerticalOptions="CenterAndExpand">
+                                        <ImageButton.Source>
+                                            <FontImageSource
+                                                FontFamily="IconFont"
+                                                Glyph="{x:Static res:FontIcons.Minus}"
+                                                Size="25"
+                                                Color="White" />
+                                        </ImageButton.Source>
+                                    </ImageButton>
+                                    <Label
+                                        x:Name="lblCartAmount"
+                                        Margin="10,0"
+                                        FontAttributes="Bold"
+                                        FontSize="16"
+                                        LineBreakMode="WordWrap"
+                                        Text="0"
+                                        TextColor="{StaticResource NormalColor}"
+                                        VerticalOptions="CenterAndExpand" />
+                                    <ImageButton
+                                        BackgroundColor="{StaticResource HighlightColor}"
+                                        Command="{Binding Source={x:Reference mainModel}, Path=IncreaseCartAmountCommand}"
+                                        CommandParameter="{Binding Source={x:Reference lblCartAmount}, Path=.}"
+                                        CornerRadius="3"
+                                        VerticalOptions="CenterAndExpand">
+                                        <ImageButton.Source>
+                                            <FontImageSource
+                                                FontFamily="IconFont"
+                                                Glyph="{x:Static res:FontIcons.Plus}"
+                                                Size="25"
+                                                Color="White" />
+                                        </ImageButton.Source>
+                                    </ImageButton>
+                                </StackLayout>
+                            </StackLayout>
+                            <Label
+                                Margin="10,0"
+                                FontSize="14"
+                                LineBreakMode="WordWrap"
+                                Text="{Binding Description}"
+                                TextColor="{StaticResource HighlightColor}" />
+
+                        </StackLayout>
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </StackLayout>
+
+</controls:AnimationPage>

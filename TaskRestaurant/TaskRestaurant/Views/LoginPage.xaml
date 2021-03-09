@@ -1,0 +1,77 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<controls:AnimationPage
+    x:Class="TaskRestaurant.Views.LoginPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:controls="clr-namespace:FormsControls.Base;assembly=FormsControls.Base"
+    xmlns:res="clr-namespace:TaskRestaurant.Common">
+
+    <controls:AnimationPage.PageAnimation>
+        <controls:FadePageAnimation
+            BounceEffect="False"
+            Subtype="FromLeft"
+            Duration="Short" />
+    </controls:AnimationPage.PageAnimation>
+    <ScrollView Margin="0,0,0,15" VerticalScrollBarVisibility="Never">
+        <StackLayout Margin="20,0" Spacing="15">
+            <Label
+                Margin="0,30,0,55"
+                FontSize="32"
+                Text="Login"
+                TextColor="{StaticResource HeaderColor}" />
+            <Entry
+                x:Name="txtUsername"
+                Keyboard="Email"
+                Placeholder="Username"
+                ReturnType="Next"
+                Style="{StaticResource MainEntry}" />
+            <Grid>
+                <Entry
+                    x:Name="txtPassword"
+                    IsPassword="True"
+                    Keyboard="Text"
+                    Placeholder="Password"
+                    ReturnType="Done"
+                    Style="{StaticResource MainEntry}" />
+                <ImageButton
+                    x:Name="btnShowHide"
+                    BackgroundColor="{StaticResource BackgroundColor}"
+                    Clicked="btnShowHide_Clicked"
+                    CornerRadius="10"
+                    HorizontalOptions="End"
+                    VerticalOptions="CenterAndExpand">
+                    <ImageButton.Source>
+                        <FontImageSource
+                            FontFamily="IconFont"
+                            Glyph="{x:Static res:FontIcons.Eye}"
+                            Size="25"
+                            Color="LightGray" />
+                    </ImageButton.Source>
+                </ImageButton>
+            </Grid>
+
+            <Button
+                x:Name="btnLogin"
+                Margin="10,40,10,0"
+                Clicked="btnLogin_Clicked"
+                Style="{StaticResource MainButton}"
+                Text="Login" />
+
+            <Label FontSize="14" HorizontalOptions="CenterAndExpand">
+                <Label.FormattedText>
+                    <FormattedString>
+                        <Span Text="Don't have an acoount ? " TextColor="{StaticResource NormalColor}" />
+                        <Span
+                            FontAttributes="Bold"
+                            Text="Sign Up"
+                            TextColor="{StaticResource HeaderColor}">
+                            <Span.GestureRecognizers>
+                                <TapGestureRecognizer x:Name="OpenSignUp" Tapped="OpenSignUp_Tapped" />
+                            </Span.GestureRecognizers>
+                        </Span>
+                    </FormattedString>
+                </Label.FormattedText>
+            </Label>
+        </StackLayout>
+    </ScrollView>
+</controls:AnimationPage>
